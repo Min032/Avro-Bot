@@ -11,7 +11,7 @@ import logging
 import json
 import os
 from datetime import datetime as dt
-from urllib.parse import urlparse
+from urllib.request import Request, urlopen
 
 from pathlib import Path
 from termcolor import colored
@@ -25,7 +25,8 @@ def print_log(text, data):
 
 
 def read_hash(url):
-    response = urlopen(url).read()
+    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    response = urlopen(req).read()
     current_hash = hashlib.sha224(response).hexdigest()
     return current_hash
 
@@ -113,6 +114,7 @@ def follow(update, context):
         data = json.load(file)
 
     for url in urls:
+
         if not check_if_url_valid(url):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Url not valid:\n'
                                                                             + url + '\n')
