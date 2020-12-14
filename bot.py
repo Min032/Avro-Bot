@@ -209,10 +209,13 @@ def callback_minute(context: telegram.ext.CallbackContext):
         json.dump(data, file)
 
 
-bot = telegram.Bot(token = '1275479367:AAGNjTawDfsqhDW9M2zn3-bmZdev_LZkdow')
+TOKEN = '1275479367:AAGNjTawDfsqhDW9M2zn3-bmZdev_LZkdow'
+bot = telegram.Bot(token = TOKEN)
 
-updater = Updater(token='1275479367:AAGNjTawDfsqhDW9M2zn3-bmZdev_LZkdow', use_context=True)
+updater = Updater(token=TOKEN, use_context=True)
 job_queuer = updater.job_queue
+
+updater.bot.setWebhook('https://yourherokuappname.herokuapp.com/' + TOKEN)
 
 dispatcher = updater.dispatcher
 
