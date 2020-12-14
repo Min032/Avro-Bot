@@ -8,6 +8,7 @@ from telegram.ext import CommandHandler
 import logging
 
 import json
+import os
 from datetime import datetime as dt
 
 from pathlib import Path
@@ -215,10 +216,12 @@ def callback_minute(context: telegram.ext.CallbackContext):
 
 
 TOKEN = '1275479367:AAGNjTawDfsqhDW9M2zn3-bmZdev_LZkdow'
+PORT = int(os.environ.get('PORT', '8443'))
 
 updater = Updater(token=TOKEN, use_context=True)
 job_queuer = updater.job_queue
 
+updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
 updater.bot.setWebhook('https://avro-bot.herokuapp.com/' + TOKEN)
 
 dispatcher = updater.dispatcher
