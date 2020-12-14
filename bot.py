@@ -10,6 +10,7 @@ import logging
 import json
 import os
 from datetime import datetime as dt
+from urllib.parse import urlparse
 
 from pathlib import Path
 from termcolor import colored
@@ -36,6 +37,14 @@ def check_user_base(id):
         return False
     else:
         return True
+
+
+def check_if_url_valid(url):
+    try:
+        result = urlparse(url)
+        return all([result.scheme, result.netloc])
+    except ValueError:
+        return False
 
 
 def start(update, context):
@@ -75,7 +84,10 @@ def follow(update, context):
         data = json.load(file)
 
     for url in urls:
-        if url not in data[current_chat_id]:
+        if not check_if_url_valid(url):
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Url not valid:\n'
+                                                                            + url + '\n')
+        elif url not in data[current_chat_id]:
             hash_code = read_hash(url)
             data[current_chat_id][url] =  hash_code
             context.bot.send_message(chat_id=update.effective_chat.id, text='Successfully followed:\n'
@@ -107,7 +119,10 @@ def unfollow(update, context):
         data = json.load(file)
 
     for url in urls:
-        if url in data[current_chat_id]:
+        if not check_if_url_valid(url):
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Url not valid:\n'
+                                                                            + url + '\n')
+        elif url in data[current_chat_id]:
             data[current_chat_id].pop(url)
             context.bot.send_message(chat_id=update.effective_chat.id,
                                      text='Successfully unfollowed: ' + url + '\n')
