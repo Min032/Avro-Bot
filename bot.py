@@ -1,6 +1,7 @@
 import hashlib
 from urllib.request import urlopen
 
+import requests
 import telegram
 from telegram.ext import Updater, MessageHandler, Filters
 from telegram.ext import CommandHandler
@@ -41,9 +42,9 @@ def check_user_base(id):
 
 def check_if_url_valid(url):
     try:
-        result = urlparse(url)
-        return all([result.scheme, result.netloc])
-    except ValueError:
+        data = requests.get(url)
+        return True
+    except Exception:
         return False
 
 
