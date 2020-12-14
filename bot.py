@@ -13,8 +13,8 @@ from datetime import datetime as dt
 from pathlib import Path
 from termcolor import colored
 
-data_path = Path.cwd().parent.joinpath('resources').joinpath('data.json')
-kraljevo_path = Path.cwd().parent.joinpath('resources').joinpath('kraljevo.jpg')
+data_path = Path.cwd().joinpath('resources').joinpath('data.json')
+kraljevo_path = Path.cwd().joinpath('resources').joinpath('kraljevo.jpg')
 
 
 def print_log(text, data):
