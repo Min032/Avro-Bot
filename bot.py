@@ -38,17 +38,22 @@ def check_user_base(id):
 
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I am a bot and I will notify you "
-                                                                    "whenever a site changes.\n"
-                                                                    "Welcome!")
-    with open(data_path, 'r') as file:
-        data = json.load(file)
-
     current_chat_id = str(update.effective_chat.id)
-    data[current_chat_id] = {}
+    if check_user_base(current_chat_id) is False:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Hello! I am a bot and I will notify you "
+                                                                        "whenever a site changes.\n"
+                                                                        "Welcome!")
+        with open(data_path, 'r') as file:
+            data = json.load(file)
 
-    with open(data_path, 'w') as file:
-        json.dump(data, file)
+        current_chat_id = str(update.effective_chat.id)
+        data[current_chat_id] = {}
+
+        with open(data_path, 'w') as file:
+            json.dump(data, file)
+    else:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="You have already started the bot"
+                                                                        " once. :)")
 
 
 def follow(update, context):
