@@ -210,12 +210,11 @@ def callback_minute(context: telegram.ext.CallbackContext):
 
 
 TOKEN = '1275479367:AAGNjTawDfsqhDW9M2zn3-bmZdev_LZkdow'
-bot = telegram.Bot(token = TOKEN)
 
 updater = Updater(token=TOKEN, use_context=True)
 job_queuer = updater.job_queue
 
-updater.bot.setWebhook('https://yourherokuappname.herokuapp.com/' + TOKEN)
+updater.bot.setWebhook('https://avro-bot.herokuapp.com/' + TOKEN)
 
 dispatcher = updater.dispatcher
 
