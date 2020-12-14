@@ -61,9 +61,37 @@ def start(update, context):
 
         with open(data_path, 'w') as file:
             json.dump(data, file)
+
+        text = 'Here\'s the list of my commands:\n' \
+               '/start - Make an entry for yourself in the database\n' \
+               '️/follow <link(s)> - Url(s) that you\'d like to keep track of\n' \
+               '/unfollow <link(s)> - Url(s) that you no longer want to keep track of\n' \
+               '/unfollow_all - Delete all your urls from database\n' \
+               '️/list - Info on what you follow\n' \
+               '/help - Bot manual\n' \
+               '/end - Wipe all your data'
+        context.bot.send_message(chat_id=update.effective_chat.id, text=text)
     else:
         context.bot.send_message(chat_id=update.effective_chat.id, text="You have already started the bot"
                                                                         " once. :)")
+
+
+def end(update, context):
+    current_chat_id = str(update.effective_chat.id)
+    if check_user_base(current_chat_id) is True:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="I have wiped all your data.")
+
+        with open(data_path, 'r') as file:
+            data = json.load(file)
+
+        current_chat_id = str(update.effective_chat.id)
+        data.pop(current_chat_id)
+
+        with open(data_path, 'w') as file:
+            json.dump(data, file)
+
+    else:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="You are not in the database... yet.")
 
 
 def follow(update, context):
@@ -187,13 +215,14 @@ def list_all(update, context):
 
 
 def show_help(update, context):
-    text = 'Here\'s a list of my commands:\n' \
+    text = 'Here\'s the list of my commands:\n' \
            '/start - Make an entry for yourself in the database\n' \
            '️/follow <link(s)> - Url(s) that you\'d like to keep track of\n' \
            '/unfollow <link(s)> - Url(s) that you no longer want to keep track of\n' \
            '/unfollow_all - Delete all your urls from database\n' \
            '️/list - Info on what you follow\n' \
-           '/help - Bot manual'
+           '/help - Bot manual\n' \
+           '/end - Wipe all your data'
     context.bot.send_message(chat_id=update.effective_chat.id, text=text)
 
 
@@ -251,6 +280,7 @@ unfollow_all_handler = CommandHandler('unfollow_all', unfollow_all, run_async=Tr
 list_handler = CommandHandler('list', list_all)
 help_handler = CommandHandler('help', show_help)
 kraljevo_handler = CommandHandler('kraljevo', kraljevo)
+end_handler = CommandHandler('end', end, run_async=True)
 
 unknown_handler = MessageHandler(Filters.command, unknown)
 
@@ -261,6 +291,7 @@ dispatcher.add_handler(unfollow_handler)
 dispatcher.add_handler(unfollow_all_handler)
 dispatcher.add_handler(list_handler)
 dispatcher.add_handler(help_handler)
+dispatcher.add_handler(end_handler)
 dispatcher.add_handler(unknown_handler)
 
 job_queuer.run_repeating(callback_minute, interval=30, first=0)
