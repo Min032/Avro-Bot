@@ -546,11 +546,11 @@ def list_comments(update, context):
             data = cursor.fetchall()
 
             if data:
-                text = "Your comments:\n\n-----"
+                text = "Your comments:\n\n-----\n"
 
                 for comment_id, comment_text in data:
-                    text = text + "Comment id: " + comment_id + "\n" +\
-                           "Comment text:\n" + comment_text + "\n-----\n"
+                    text = text + "Comment id: " + str(comment_id) + "\n" +\
+                           "Comment text:\n" + str(comment_text) + "\n-----\n"
 
                 context.bot.send_message(chat_id=update.effective_chat.id, text=text)
             else:
@@ -575,7 +575,7 @@ def list_comments(update, context):
             cursor.close()
             conn.close()
             print_log("PostgreSQL connection is closed.")
-
+            
 
 def kraljevo(update, context):
     global kraljevo_path
@@ -743,8 +743,8 @@ PORT = int(os.environ.get('PORT', '8443'))
 updater = Updater(token=TOKEN, use_context=True)
 job_queuer = updater.job_queue
 
-updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
-updater.bot.setWebhook('https://avro-bot.herokuapp.com/' + TOKEN)
+# updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
+# updater.bot.setWebhook('https://avro-bot.herokuapp.com/' + TOKEN)
 
 dispatcher = updater.dispatcher
 
