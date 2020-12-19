@@ -427,7 +427,7 @@ def comment(update, context):
 
     # Send creator a message; creator chat id is a system variable
     comment_text = " ".join(context.args)
-    context.bot.send_message(chat_id=CREATOR_ID, text=comment_text)
+    context.bot.send_message(chat_id=CREATOR_ID, text="New comment arrived:\n\n" + comment_text)
     context.bot.send_message(chat_id=update.effective_chat.id, text="Successfully sent a comment to the creator.")
 
     # If user did not flood the database, make an entry for his comment,
