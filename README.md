@@ -5,6 +5,10 @@ Avro bot will notify you whenever a site changes its content! All you have to do
 Once you follow an url, the bot will store your chat id, url and current webpage content hashed. Every 60 seconds, bot is monitoring all of the urls in the database and checks if the hash has changed since the last monitor. If it did, it sends a message to the corresponding chat.
 </b>
 
+## :grey_exclamation: Warning
+
+Currently, the bot is on Heroku hosting. Plan that I'm using is free, so after 2 hours of no traffic, bot sleeps. That means it needs to be "pinged" every 2 hours to work correctly. Right now the goal is only to have a proof of concept live somewhere, while fully working bot that is ready to be used is not an option (yet).
+
 ## :computer: About
 
 <b>Written in:</b> Python3 </br>
