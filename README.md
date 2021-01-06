@@ -15,7 +15,7 @@ Once you follow an url, the bot will store your chat id, url and current webpage
 
 ## :grey_exclamation: Warning
 
-Currently, the bot is on Heroku hosting. Plan that I'm using is free, so after 2 hours of no traffic, bot sleeps. That means it needs to be "pinged" every 2 hours to work correctly. Right now the goal is only to have a proof of concept live somewhere, while fully working bot that is ready to be used is not an option (yet).
+There are still some issues with deployment. I am hosting it on Heroku, but I am yet to figure out how workers and webs work... Right now bot is in beta phase.
 
 ## ❔ How to use:
 
