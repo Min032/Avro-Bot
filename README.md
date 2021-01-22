@@ -15,7 +15,7 @@ Once you follow an url, the bot will store your chat id, url and current webpage
 
 ## :grey_exclamation: Warning
 
-There are still some issues with deployment. I am hosting it on Heroku, but I am yet to figure out how workers and webs work... Right now bot is in beta phase.
+Bot is fully functional as of last deployment. Tested OK.
 
 ## ❔ How to use:
 
