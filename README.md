@@ -31,7 +31,7 @@ Bot is fully functional as of last deployment. Tested OK.
 * <b>/end</b>- Wipe all your data 
 * <b>/help</b> - Bot manual/list of commands
 
-Any suggestions or questions, either contact the bot creator (me): @Minnx or send a comment via bot.</br></br>
+Any suggestions or questions, either contact the bot creator (me): @mincxh or send a comment via bot.</br></br>
 
 
 ![screenshot](resources/screenshot.png "Screenshot")
