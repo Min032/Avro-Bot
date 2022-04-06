@@ -17,7 +17,7 @@ pickleshare==0.7.5
 pipreqs==0.4.10
 prompt-toolkit==3.0.8
 pycparser==2.20
-Pygments==2.7.3
+Pygments==2.7.4
 python-telegram-bot==13.1
 pytz==2020.4
 requests==2.25.0
