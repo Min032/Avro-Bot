@@ -15,7 +15,7 @@ Once you follow an url, the bot will store your chat id, url and current webpage
 
 ## :grey_exclamation: Warning
 
-Bot is fully functional as of last deployment. Tested OK.
+Bot is taken off server so it's down at the moment.
 
 ## ❔ How to use:
 
