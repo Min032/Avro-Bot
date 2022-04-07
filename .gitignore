@@ -149,3 +149,6 @@ fabric.properties
 
 # Testing file
 test.py
+
+# Logging folder
+log/
