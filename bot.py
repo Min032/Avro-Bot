@@ -25,7 +25,13 @@ CREATOR_ID = os.environ['CREATOR_ID']
 
 # Custom console logging.
 def print_log(text, data = ""):
-    print(colored(dt.now().strftime("%I:%M:%S %p"), 'cyan'), " ", colored(text, 'magenta'), data)
+    try:
+        with open(Path().resolve().joinpath("log").joinpath("log.txt"), 'a') as f:
+            f.write(str(dt.now().strftime("%I:%M:%S %p")) + ": " + str(text) + ". " + str(data) + "\n")
+
+    except IOError:
+        print(colored(dt.now().strftime("%I:%M:%S %p"), 'cyan'), " ", colored(text, 'magenta'), "can not open log file")
+    #print(colored(dt.now().strftime("%I:%M:%S %p"), 'cyan'), " ", colored(text, 'magenta'), data)
 
 
 # Bypass anti-crawler systems by using browser's "identity".
